@@ -29,7 +29,7 @@ export const useSocialSignIn = () => {
   const signInWithProvider = useCallback(
     async ({ callbackURL, provider }: SocialSignInOptions) => {
       await authClient.signIn.social({
-        provider,
+        provider: provider as any,
         callbackURL
       })
     },

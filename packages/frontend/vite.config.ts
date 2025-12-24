@@ -5,8 +5,15 @@ import viteReact from '@vitejs/plugin-react'
 import viteTsConfigPaths from 'vite-tsconfig-paths'
 import tailwindcss from '@tailwindcss/vite'
 import { nitro } from 'nitro/vite'
+import path from 'path'
 
 const config = defineConfig({
+  resolve: {
+    alias: {
+      '@template/domain': path.resolve(__dirname, '../domain/src'),
+      '@template/database': path.resolve(__dirname, '../database/src'),
+    },
+  },
   plugins: [
     devtools(),
     nitro(),

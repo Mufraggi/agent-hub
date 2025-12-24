@@ -1,4 +1,4 @@
-import { db } from "@template/database/effect"
+import { db } from "@template/database/db"
 import { betterAuth } from "better-auth"
 import { drizzleAdapter } from "better-auth/adapters/drizzle"
 

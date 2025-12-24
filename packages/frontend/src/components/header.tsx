@@ -2,7 +2,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth/auth-client";
-import { Search, Plus, User, Sparkles } from "lucide-react";
+import { Search, Plus, User } from "lucide-react";
 
 export default function () {
   const { data: session } = authClient.useSession();
@@ -66,7 +66,7 @@ export default function () {
             />
           </div>
           <Button asChild className="shrink-0">
-            <Link to="/submit">
+            <Link to="/">
               <Plus className="h-4 w-4 mr-2" />
               <span className="hidden sm:inline">Partager</span>
             </Link>
@@ -76,7 +76,7 @@ export default function () {
         {/* Actions - Right */}
         <div className="flex items-center gap-2 flex-1 justify-end">
           <Button variant="ghost" size="icon" asChild>
-            <Link to="/profile">
+            <Link to="/">
               <User className="h-5 w-5" />
               <span className="sr-only">Profil</span>
             </Link>

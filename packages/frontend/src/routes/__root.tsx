@@ -17,7 +17,7 @@ import type { TRPCRouter } from "@/integrations/trpc/router";
 import type { TRPCOptionsProxy } from "@trpc/tanstack-react-query";
 import { Toaster } from "sonner";
 
-interface MyRouterContext {
+export interface MyRouterContext {
   queryClient: QueryClient;
 
   trpc: TRPCOptionsProxy<TRPCRouter>;

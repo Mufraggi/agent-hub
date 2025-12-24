@@ -89,12 +89,10 @@ export function SignupContainer({ className, ...props }: SignupContainerProps) {
                       />
                       {isInvalid && (
                         <FieldError
-                          errors={field.state.meta.errors.map((e: unknown) => ({
-                            message:
-                              typeof e === "string"
-                                ? e
-                                : (e as { message?: string })?.message,
-                          }))}
+                          errors={field.state.meta.errors.map((e: unknown) => {
+                            const message = typeof e === "string" ? e : (e as { message?: string })?.message;
+                            return message ? { message } : undefined;
+                          })}
                         />
                       )}
                     </Field>
@@ -130,12 +128,10 @@ export function SignupContainer({ className, ...props }: SignupContainerProps) {
                       />
                       {isInvalid && (
                         <FieldError
-                          errors={field.state.meta.errors.map((e: unknown) => ({
-                            message:
-                              typeof e === "string"
-                                ? e
-                                : (e as { message?: string })?.message,
-                          }))}
+                          errors={field.state.meta.errors.map((e: unknown) => {
+                            const message = typeof e === "string" ? e : (e as { message?: string })?.message;
+                            return message ? { message } : undefined;
+                          })}
                         />
                       )}
                     </Field>
@@ -171,12 +167,10 @@ export function SignupContainer({ className, ...props }: SignupContainerProps) {
                       />
                       {isInvalid && (
                         <FieldError
-                          errors={field.state.meta.errors.map((e: unknown) => ({
-                            message:
-                              typeof e === "string"
-                                ? e
-                                : (e as { message?: string })?.message,
-                          }))}
+                          errors={field.state.meta.errors.map((e: unknown) => {
+                            const message = typeof e === "string" ? e : (e as { message?: string })?.message;
+                            return message ? { message } : undefined;
+                          })}
                         />
                       )}
                     </Field>
