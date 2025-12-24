@@ -1,13 +1,13 @@
+import { authClient } from "@/lib/auth/auth-client"
 import { useForm } from "@tanstack/react-form"
 import { toast } from "sonner"
-import { authClient } from "@/lib/auth/auth-client"
-import { signupFormDefaults } from "../../schema"
 import {
-  validateEmail,
-  validatePassword,
-  validateName,
   toFormValidator,
+  validateEmail,
+  validateName,
+  validatePassword
 } from "../../factory/validators/auth.validators"
+import { signupFormDefaults } from "../../schema/form/signup.form.schema"
 
 /**
  * Signup form hook with validation and submission
@@ -21,7 +21,7 @@ export const useSignupForm = () => {
           email: value.email,
           password: value.password,
           name: value.name,
-          callbackURL: "/dashboard",
+          callbackURL: "/dashboard"
         },
         {
           onSuccess: () => {
@@ -29,10 +29,10 @@ export const useSignupForm = () => {
           },
           onError: (ctx) => {
             toast.error(ctx.error.message)
-          },
+          }
         }
       )
-    },
+    }
   })
 
   return {
@@ -40,7 +40,7 @@ export const useSignupForm = () => {
     validators: {
       name: toFormValidator(validateName),
       email: toFormValidator(validateEmail),
-      password: toFormValidator(validatePassword),
-    },
+      password: toFormValidator(validatePassword)
+    }
   }
 }

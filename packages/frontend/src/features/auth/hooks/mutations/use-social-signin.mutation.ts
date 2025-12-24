@@ -1,6 +1,7 @@
-import { useCallback } from "react"
 import { authClient } from "@/lib/auth/auth-client"
-import type { OAuthProvider, CallbackURL } from "../../schema"
+import type { OAuthProvider } from "better-auth"
+import { useCallback } from "react"
+import type { CallbackURL } from "../../schema/auth.schema"
 
 type SocialSignInOptions = {
   provider: OAuthProvider
@@ -14,22 +15,22 @@ export const useSocialSignIn = () => {
   const signInWithGitHub = useCallback(async (callbackURL: CallbackURL) => {
     await authClient.signIn.social({
       provider: "github",
-      callbackURL,
+      callbackURL
     })
   }, [])
 
   const signInWithGoogle = useCallback(async (callbackURL: CallbackURL) => {
     await authClient.signIn.social({
       provider: "google",
-      callbackURL,
+      callbackURL
     })
   }, [])
 
   const signInWithProvider = useCallback(
-    async ({ provider, callbackURL }: SocialSignInOptions) => {
+    async ({ callbackURL, provider }: SocialSignInOptions) => {
       await authClient.signIn.social({
-        provider,
-        callbackURL,
+        provider: provider as any,
+        callbackURL
       })
     },
     []
@@ -38,6 +39,6 @@ export const useSocialSignIn = () => {
   return {
     signInWithGitHub,
     signInWithGoogle,
-    signInWithProvider,
+    signInWithProvider
   }
 }

@@ -1,5 +1,6 @@
+import { Email, UserName } from "@template/domain/UserType"
 import { Schema } from "effect"
-import { Email, StrongPassword, UserName, CallbackURL } from "../auth.schema"
+import { CallbackURL, StrongPassword } from "../auth.schema.js"
 
 /**
  * Sign up request with email/password
@@ -8,5 +9,5 @@ export class SignUpEmailRequest extends Schema.Class<SignUpEmailRequest>("SignUp
   email: Email,
   password: StrongPassword,
   name: UserName,
-  callbackURL: CallbackURL,
+  callbackURL: CallbackURL
 }) {}

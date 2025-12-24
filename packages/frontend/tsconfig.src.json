@@ -6,11 +6,14 @@
     { "path": "../database" }
   ],
   "compilerOptions": {
+    "jsx": "react-jsx",
     "types": ["node"],
     "outDir": "build/src",
     "tsBuildInfoFile": ".tsbuildinfo/src.tsbuildinfo",
     "rootDir": "src",
     "baseUrl": ".",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "paths": {
       "@/*": ["./src/*"]
     }

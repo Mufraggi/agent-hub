@@ -1,11 +1,11 @@
 export {
-  InvalidCredentialsError,
+  AuthNetworkError,
+  AuthValidationError,
   EmailAlreadyExistsError,
   EmailNotVerifiedError,
+  InvalidCredentialsError,
   OAuthProviderError,
-  SessionExpiredError,
-  AuthValidationError,
-  AuthNetworkError,
+  SessionExpiredError
 } from "./auth.errors"
 export type { AuthDomainError } from "./auth.errors"
 

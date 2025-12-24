@@ -6,7 +6,7 @@ import { Schema } from "effect"
 export class SignupFormData extends Schema.Class<SignupFormData>("SignupFormData")({
   name: Schema.String,
   email: Schema.String,
-  password: Schema.String,
+  password: Schema.String
 }) {}
 
 /**
@@ -15,5 +15,5 @@ export class SignupFormData extends Schema.Class<SignupFormData>("SignupFormData
 export const signupFormDefaults: typeof SignupFormData.Type = {
   name: "",
   email: "",
-  password: "",
+  password: ""
 }

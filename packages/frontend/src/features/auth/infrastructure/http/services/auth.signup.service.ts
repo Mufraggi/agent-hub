@@ -1,16 +1,14 @@
+import { authClient } from "@/lib/auth/auth-client.js"
 import { Effect, Layer } from "effect"
-import { authClient } from "@/lib/auth/auth-client"
-import type { SignUpEmailRequest } from "../../../schema"
-import {
-  EmailAlreadyExistsError,
-  AuthNetworkError,
-  type AuthDomainError,
-} from "../../../domain"
+import type { AuthDomainError } from "../../../domain"
+import { AuthNetworkError, EmailAlreadyExistsError } from "../../../domain"
+import type { SignUpEmailRequest } from "../../../schema/api/auth.signup.schema"
 
 export class AuthSignUpService extends Effect.Service<AuthSignUpService>()(
   "AuthSignUpService",
   {
-    effect: Effect.gen(function* () {
+    effect: Effect.gen(function*() {
+      yield* Effect.log("")
       const signUpWithEmail = (
         request: SignUpEmailRequest
       ): Effect.Effect<void, AuthDomainError> =>
@@ -21,7 +19,7 @@ export class AuthSignUpService extends Effect.Service<AuthSignUpService>()(
                 email: request.email,
                 password: request.password,
                 name: request.name,
-                callbackURL: request.callbackURL,
+                callbackURL: request.callbackURL
               },
               {
                 onSuccess: () => {
@@ -29,7 +27,7 @@ export class AuthSignUpService extends Effect.Service<AuthSignUpService>()(
                 },
                 onError: (ctx) => {
                   throw new Error(ctx.error.message)
-                },
+                }
               }
             ),
           catch: (error) => {
@@ -42,17 +40,17 @@ export class AuthSignUpService extends Effect.Service<AuthSignUpService>()(
               }
             }
             return new AuthNetworkError({ cause: error })
-          },
+          }
         }).pipe(Effect.asVoid)
 
       return { signUpWithEmail } as const
-    }),
+    })
   }
 ) {
   static InMemory = Layer.succeed(AuthSignUpService, {
     signUpWithEmail: (_request: SignUpEmailRequest) => {
       // Simulate successful signup
       return Effect.void
-    },
+    }
   } as unknown as AuthSignUpService)
 }

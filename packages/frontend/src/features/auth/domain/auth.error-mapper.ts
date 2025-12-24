@@ -6,27 +6,19 @@ import type { AuthDomainError } from "./auth.errors"
  */
 export const mapAuthErrorToMessage = (error: AuthDomainError): string =>
   Match.value(error).pipe(
-    Match.tag("InvalidCredentialsError", () =>
-      "Invalid email or password. Please check your credentials and try again."
+    Match.tag(
+      "InvalidCredentialsError",
+      () => "Invalid email or password. Please check your credentials and try again."
     ),
-    Match.tag("EmailAlreadyExistsError", ({ email }) =>
-      `An account with email ${email} already exists. Please sign in or use a different email.`
+    Match.tag(
+      "EmailAlreadyExistsError",
+      ({ email }) => `An account with email ${email} already exists. Please sign in or use a different email.`
     ),
-    Match.tag("EmailNotVerifiedError", () =>
-      "Please verify your email address before signing in."
-    ),
-    Match.tag("OAuthProviderError", ({ provider, reason }) =>
-      `Authentication with ${provider} failed: ${reason}`
-    ),
-    Match.tag("SessionExpiredError", () =>
-      "Your session has expired. Please sign in again."
-    ),
-    Match.tag("AuthValidationError", ({ field, message }) =>
-      `${field}: ${message}`
-    ),
-    Match.tag("AuthNetworkError", () =>
-      "A network error occurred. Please check your connection and try again."
-    ),
+    Match.tag("EmailNotVerifiedError", () => "Please verify your email address before signing in."),
+    Match.tag("OAuthProviderError", ({ provider, reason }) => `Authentication with ${provider} failed: ${reason}`),
+    Match.tag("SessionExpiredError", () => "Your session has expired. Please sign in again."),
+    Match.tag("AuthValidationError", ({ field, message }) => `${field}: ${message}`),
+    Match.tag("AuthNetworkError", () => "A network error occurred. Please check your connection and try again."),
     Match.exhaustive
   )
 

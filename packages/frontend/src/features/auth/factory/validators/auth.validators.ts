@@ -1,6 +1,7 @@
-import { Schema, Either, Option } from "effect"
+import { Email, UserName } from "@template/domain/UserType"
+import { Either, Option, Schema } from "effect"
 import { ArrayFormatter } from "effect/ParseResult"
-import { Email, StrongPassword, UserName } from "../../schema"
+import { StrongPassword } from "../../schema/auth.schema"
 
 /**
  * Validates email and returns Option with error message
@@ -47,6 +48,5 @@ export const validateName = (value: string): Option.Option<string> => {
  * Converts Option<string> to string | undefined for compatibility
  */
 export const toFormValidator =
-  (validator: (value: string) => Option.Option<string>) =>
-  (value: string): string | null =>
+  (validator: (value: string) => Option.Option<string>) => (value: string): string | null =>
     Option.getOrNull(validator(value))

@@ -1,5 +1,6 @@
+import { Email } from "@template/domain/UserType"
 import { Schema } from "effect"
-import { Email, StrongPassword, CallbackURL } from "../auth.schema"
+import { CallbackURL, StrongPassword } from "../auth.schema"
 
 /**
  * Sign in request with email/password
@@ -7,7 +8,7 @@ import { Email, StrongPassword, CallbackURL } from "../auth.schema"
 export class SignInEmailRequest extends Schema.Class<SignInEmailRequest>("SignInEmailRequest")({
   email: Email,
   password: StrongPassword,
-  callbackURL: CallbackURL,
+  callbackURL: CallbackURL
 }) {}
 
 /**
@@ -15,5 +16,5 @@ export class SignInEmailRequest extends Schema.Class<SignInEmailRequest>("SignIn
  */
 export class SignInSocialRequest extends Schema.Class<SignInSocialRequest>("SignInSocialRequest")({
   provider: Schema.Literal("github", "google", "apple"),
-  callbackURL: CallbackURL,
+  callbackURL: CallbackURL
 }) {}

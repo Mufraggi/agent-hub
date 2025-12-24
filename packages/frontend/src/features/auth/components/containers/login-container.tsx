@@ -19,7 +19,8 @@ import { Input } from "@/components/ui/input"
 import { Link } from "@tanstack/react-router"
 import { useLoginForm, useSocialSignIn } from "../../hooks"
 import { SocialLoginButton } from "../common/social-login-button"
-import type { CallbackURL } from "../../schema"
+import { CallbackURL } from "../../schema/auth.schema"
+
 
 type LoginContainerProps = React.ComponentProps<"div">
 
@@ -88,12 +89,10 @@ export function LoginContainer({ className, ...props }: LoginContainerProps) {
                       />
                       {isInvalid && (
                         <FieldError
-                          errors={field.state.meta.errors.map((e: unknown) => ({
-                            message:
-                              typeof e === "string"
-                                ? e
-                                : (e as { message?: string })?.message,
-                          }))}
+                          errors={field.state.meta.errors.map((e: unknown) => {
+                            const message = typeof e === "string" ? e : (e as { message?: string })?.message;
+                            return message ? { message } : undefined;
+                          })}
                         />
                       )}
                     </Field>
@@ -129,12 +128,10 @@ export function LoginContainer({ className, ...props }: LoginContainerProps) {
                       />
                       {isInvalid && (
                         <FieldError
-                          errors={field.state.meta.errors.map((e: unknown) => ({
-                            message:
-                              typeof e === "string"
-                                ? e
-                                : (e as { message?: string })?.message,
-                          }))}
+                          errors={field.state.meta.errors.map((e: unknown) => {
+                            const message = typeof e === "string" ? e : (e as { message?: string })?.message;
+                            return message ? { message } : undefined;
+                          })}
                         />
                       )}
                     </Field>
