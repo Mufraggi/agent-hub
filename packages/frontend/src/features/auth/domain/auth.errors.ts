@@ -1,5 +1,5 @@
+import type { Email } from "@template/domain/UserType"
 import { Data } from "effect"
-import type { Email } from "../schema"
 
 /**
  * Invalid credentials error - wrong email or password

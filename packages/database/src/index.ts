@@ -1,11 +1,3 @@
-import { drizzle } from "drizzle-orm/node-postgres";
-import pg from "pg";
-import * as authSchema from "./schema/auth";
+export * as effect from "./effect.js"
 
-const pool = new pg.Pool({
-	connectionString: process.env.DATABASE_URL,
-});
-
-export const db = drizzle(pool, { schema: authSchema });
-
-export * from "./schema/auth";
+export * as auth from "./schema/auth.js"

@@ -1,16 +1,14 @@
 import { Effect, Layer } from "effect"
-import { authClient } from "@/lib/auth/auth-client"
-import type { SignInEmailRequest, SignInSocialRequest } from "../../../schema"
-import {
-  InvalidCredentialsError,
-  AuthNetworkError,
-  type AuthDomainError,
-} from "../../../domain"
+import { authClient } from "../../../../../lib/auth/auth-client"
+import type { AuthDomainError } from "../../../domain"
+import { AuthNetworkError, InvalidCredentialsError } from "../../../domain"
+import type { SignInEmailRequest, SignInSocialRequest } from "../../../schema/api/auth.signin.schema"
 
 export class AuthSignInService extends Effect.Service<AuthSignInService>()(
   "AuthSignInService",
   {
-    effect: Effect.gen(function* () {
+    effect: Effect.gen(function*() {
+      yield* Effect.log("")
       const signInWithEmail = (
         request: SignInEmailRequest
       ): Effect.Effect<void, AuthDomainError> =>
@@ -20,7 +18,7 @@ export class AuthSignInService extends Effect.Service<AuthSignInService>()(
               {
                 email: request.email,
                 password: request.password,
-                callbackURL: request.callbackURL,
+                callbackURL: request.callbackURL
               },
               {
                 onSuccess: () => {
@@ -28,7 +26,7 @@ export class AuthSignInService extends Effect.Service<AuthSignInService>()(
                 },
                 onError: (ctx) => {
                   throw new Error(ctx.error.message)
-                },
+                }
               }
             ),
           catch: (error) => {
@@ -41,7 +39,7 @@ export class AuthSignInService extends Effect.Service<AuthSignInService>()(
               }
             }
             return new AuthNetworkError({ cause: error })
-          },
+          }
         }).pipe(Effect.asVoid)
 
       const signInWithSocial = (
@@ -51,13 +49,13 @@ export class AuthSignInService extends Effect.Service<AuthSignInService>()(
           try: () =>
             authClient.signIn.social({
               provider: request.provider,
-              callbackURL: request.callbackURL,
+              callbackURL: request.callbackURL
             }),
-          catch: (error) => new AuthNetworkError({ cause: error }),
+          catch: (error) => new AuthNetworkError({ cause: error })
         }).pipe(Effect.asVoid)
 
       return { signInWithEmail, signInWithSocial } as const
-    }),
+    })
   }
 ) {
   static InMemory = Layer.succeed(AuthSignInService, {
@@ -68,6 +66,6 @@ export class AuthSignInService extends Effect.Service<AuthSignInService>()(
     signInWithSocial: (_request: SignInSocialRequest) => {
       // Simulate OAuth redirect
       return Effect.void
-    },
+    }
   } as unknown as AuthSignInService)
 }

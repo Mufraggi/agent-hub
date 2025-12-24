@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button"
-import type { OAuthProvider } from "../../schema"
+import { OAuthProvider } from "../../schema/auth.schema.js"
+import React from "react"
+
 
 type SocialLoginButtonProps = {
   provider: OAuthProvider

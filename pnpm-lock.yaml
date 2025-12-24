@@ -179,6 +179,9 @@ importers:
       '@template/database':
         specifier: workspace:^
         version: link:../database/dist
+      '@template/domain':
+        specifier: workspace:^
+        version: link:../domain/dist
       '@trpc/client':
         specifier: ^11.4.3
         version: 11.8.1(@trpc/server@11.8.1(typescript@5.9.3))(typescript@5.9.3)

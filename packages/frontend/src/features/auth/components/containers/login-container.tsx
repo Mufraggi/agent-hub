@@ -19,7 +19,8 @@ import { Input } from "@/components/ui/input"
 import { Link } from "@tanstack/react-router"
 import { useLoginForm, useSocialSignIn } from "../../hooks"
 import { SocialLoginButton } from "../common/social-login-button"
-import type { CallbackURL } from "../../schema"
+import { CallbackURL } from "../../schema/auth.schema"
+
 
 type LoginContainerProps = React.ComponentProps<"div">
 
