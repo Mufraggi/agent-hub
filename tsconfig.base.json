@@ -46,8 +46,8 @@
       "@template/database": ["./packages/database/src/index.js"],
       "@template/database/*": ["./packages/database/src/*.js"],
       "@template/database/test/*": ["./packages/database/test/*.js"],
-      "@agent-hub/app": ["./packages/front-end/src/index.ts"],
-      "@agent-hub/app/*": ["./packages/front-end/src/*"]
-    }
-  }
+      "@agent-hub/app": ["./packages/frontend/src/index.ts"],
+      "@agent-hub/app/*": ["./packages/frontend/src/*"],
+    },
+  },
 }

@@ -132,7 +132,7 @@ importers:
         version: 3.19.13
     publishDirectory: dist
 
-  packages/front-end:
+  packages/frontend:
     dependencies:
       '@radix-ui/react-avatar':
         specifier: ^1.1.11

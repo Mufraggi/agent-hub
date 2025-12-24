@@ -5,6 +5,7 @@
     { "path": "packages/cli" },
     { "path": "packages/domain" },
     { "path": "packages/database" },
-    { "path": "packages/server" }
-  ]
+    { "path": "packages/server" },
+    { "path": "packages/frontend" },
+  ],
 }
