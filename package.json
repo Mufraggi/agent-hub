@@ -14,7 +14,14 @@
     "lint": "eslint \"**/{src,test,examples,scripts,dtslint}/**/*.{ts,mjs}\"",
     "lint-fix": "pnpm lint --fix",
     "test": "vitest",
-    "coverage": "vitest --coverage"
+    "coverage": "vitest --coverage",
+    "dev:app": "pnpm --filter @agent-hub/app dev",
+    "build:app": "pnpm --filter @agent-hub/app build",
+    "preview:app": "pnpm --filter @agent-hub/app preview",
+    "db:generate": "pnpm --filter @template/database db:generate",
+    "db:migrate": "pnpm --filter @template/database db:migrate",
+    "db:push": "pnpm --filter @template/database db:push",
+    "db:studio": "pnpm --filter @template/database db:studio"
   },
   "devDependencies": {
     "@babel/cli": "^7.25.9",
