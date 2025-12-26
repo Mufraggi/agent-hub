@@ -1,52 +1,25 @@
 import { sql } from "drizzle-orm"
 import { check, index, integer, pgTable, primaryKey, timestamp, uuid, varchar } from "drizzle-orm/pg-core"
-import { agents } from "./agents"
-
-import { skills } from "./skills"
 
 export const tags = pgTable(
   "tags",
   {
     id: uuid("id").primaryKey().defaultRandom(),
     name: varchar("name", { length: 50 }).notNull().unique(),
-    category: varchar("category", { length: 50 }),
     usageCount: integer("usage_count").default(0).notNull(),
     createdAt: timestamp("created_at").defaultNow().notNull()
   },
   (table) => ({
-    usageCheck: check(
-      "usage_count_check",
-      sql`${table.usageCount} >= 0`
-    ),
-    nameIdx: index("idx_tags_name").on(table.name),
-    categoryIdx: index("idx_tags_category").on(table.category)
+    usageCheck: check("usage_count_check", sql`${table.usageCount} >= 0`),
+    nameIdx: index("idx_tags_name").on(table.name)
   })
 )
 
-// Agent Tags
-export const agentTags = pgTable(
-  "agent_tags",
-  {
-    agentId: uuid("agent_id")
-      .references(() => agents.id, { onDelete: "cascade" })
-      .notNull(),
-    tagId: uuid("tag_id")
-      .references(() => tags.id, { onDelete: "cascade" })
-      .notNull(),
-    createdAt: timestamp("created_at").defaultNow().notNull()
-  },
-  (table) => ({
-    pk: primaryKey({ columns: [table.agentId, table.tagId] })
-  })
-)
-
-// Skill Tags
+// Skill Tags - FK vers skills ajoutée via relations
 export const skillTags = pgTable(
   "skill_tags",
   {
-    skillId: uuid("skill_id")
-      .references(() => skills.id, { onDelete: "cascade" })
-      .notNull(),
+    skillId: uuid("skill_id").notNull(),
     tagId: uuid("tag_id")
       .references(() => tags.id, { onDelete: "cascade" })
       .notNull(),
@@ -59,9 +32,24 @@ export const skillTags = pgTable(
   })
 )
 
+// Sub-Agent Tags - FK vers subAgents ajoutée via relations
+export const subAgentTags = pgTable(
+  "sub_agent_tags",
+  {
+    subAgentId: uuid("sub_agent_id").notNull(),
+    tagId: uuid("tag_id")
+      .references(() => tags.id, { onDelete: "cascade" })
+      .notNull(),
+    createdAt: timestamp("created_at").defaultNow().notNull()
+  },
+  (table) => ({
+    pk: primaryKey({ columns: [table.subAgentId, table.tagId] })
+  })
+)
+
 export type Tag = typeof tags.$inferSelect
 export type NewTag = typeof tags.$inferInsert
-export type AgentTag = typeof agentTags.$inferSelect
-export type NewAgentTag = typeof agentTags.$inferInsert
 export type SkillTag = typeof skillTags.$inferSelect
 export type NewSkillTag = typeof skillTags.$inferInsert
+export type SubAgentTag = typeof subAgentTags.$inferSelect
+export type NewSubAgentTag = typeof subAgentTags.$inferInsert

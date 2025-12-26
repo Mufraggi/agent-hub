@@ -1,30 +1,24 @@
-import { Button } from "@/components/ui/button"
-import { createFileRoute, Link } from "@tanstack/react-router"
+import { AvatarPlaceholder } from "@/components/ui/avatar-placeholder"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { createFileRoute, Link } from "@tanstack/react-router"
 import {
-  FileText,
-  Users,
-  Heart,
   Bookmark,
+  Bot,
+  Code,
+  Eye,
+  FileText,
+  Heart,
+  Layers,
   Search,
-  UserPlus,
-  Star,
-  TrendingUp,
   Share2,
   Sparkles,
-  Code,
-  Bot,
-  Layers,
-  Eye,
+  Star,
+  TrendingUp,
+  UserPlus,
+  Users
 } from "lucide-react"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { AvatarPlaceholder } from "@/components/ui/avatar-placeholder"
 
 // =============================================================================
 // Types
@@ -55,7 +49,7 @@ export const categories = [
   "Prompts",
   "Workflows",
   "Integrations",
-  "Templates",
+  "Templates"
 ]
 
 export const mockContributions: Contribution[] = [
@@ -71,7 +65,7 @@ export const mockContributions: Contribution[] = [
     likes: 342,
     views: 1420,
     type: "skill",
-    createdAt: "2024-01-15",
+    createdAt: "2024-01-15"
   },
   {
     id: "2",
@@ -85,7 +79,7 @@ export const mockContributions: Contribution[] = [
     likes: 256,
     views: 980,
     type: "architecture",
-    createdAt: "2024-01-14",
+    createdAt: "2024-01-14"
   },
   {
     id: "3",
@@ -99,7 +93,7 @@ export const mockContributions: Contribution[] = [
     likes: 489,
     views: 2030,
     type: "prompt",
-    createdAt: "2024-01-13",
+    createdAt: "2024-01-13"
   },
   {
     id: "4",
@@ -113,7 +107,7 @@ export const mockContributions: Contribution[] = [
     likes: 198,
     views: 760,
     type: "skill",
-    createdAt: "2024-01-12",
+    createdAt: "2024-01-12"
   },
   {
     id: "5",
@@ -127,7 +121,7 @@ export const mockContributions: Contribution[] = [
     likes: 412,
     views: 1870,
     type: "architecture",
-    createdAt: "2024-01-11",
+    createdAt: "2024-01-11"
   },
   {
     id: "6",
@@ -141,8 +135,8 @@ export const mockContributions: Contribution[] = [
     likes: 367,
     views: 1340,
     type: "prompt",
-    createdAt: "2024-01-10",
-  },
+    createdAt: "2024-01-10"
+  }
 ]
 
 const featuredContributions = mockContributions.slice(0, 3)
@@ -152,39 +146,34 @@ const features = [
   {
     icon: Search,
     title: "Explore the Hub",
-    description:
-      "Powerful search engine to filter the best skills and agent architectures by tags or categories.",
+    description: "Powerful search engine to filter the best skills and agent architectures by tags or categories."
   },
   {
     icon: Share2,
     title: "Contribute",
     description:
-      "Publish your own .md files. Share your technical discoveries and help the community build better AI agents.",
+      "Publish your own .md files. Share your technical discoveries and help the community build better AI agents."
   },
   {
     icon: UserPlus,
     title: "Build Your Network",
-    description:
-      "Like the best tools, save your favorites, and follow the most inspiring developers.",
+    description: "Like the best tools, save your favorites, and follow the most inspiring developers."
   },
   {
     icon: Heart,
     title: "Community Curation",
-    description:
-      "The best contributions rise to the top through community votes and engagement.",
+    description: "The best contributions rise to the top through community votes and engagement."
   },
   {
     icon: Bookmark,
     title: "Personal Collections",
-    description:
-      "Save and organize your favorite skills and architectures for quick access.",
+    description: "Save and organize your favorite skills and architectures for quick access."
   },
   {
     icon: TrendingUp,
     title: "Trending Discoveries",
-    description:
-      "Stay up to date with the latest and most popular contributions from the community.",
-  },
+    description: "Stay up to date with the latest and most popular contributions from the community."
+  }
 ]
 
 const contentTypes = [
@@ -199,55 +188,53 @@ const contentTypes = [
       "Code analysis & review",
       "Data transformation",
       "Content generation",
-      "Task automation",
-    ],
+      "Task automation"
+    ]
   },
   {
     icon: Layers,
     title: "Architectures",
-    description:
-      "Complete blueprints for building multi-agent systems with well-defined roles and interactions.",
+    description: "Complete blueprints for building multi-agent systems with well-defined roles and interactions.",
     colorClass: "bg-green-500/10 text-green-500",
     dotClass: "bg-green-500",
     items: [
       "Multi-agent setups",
       "RAG systems",
       "Pipeline designs",
-      "Orchestration patterns",
-    ],
+      "Orchestration patterns"
+    ]
   },
   {
     icon: Code,
     title: "Prompts & Templates",
-    description:
-      "Battle-tested prompts and templates that unlock specific capabilities in your AI agents.",
+    description: "Battle-tested prompts and templates that unlock specific capabilities in your AI agents.",
     colorClass: "bg-purple-500/10 text-purple-500",
     dotClass: "bg-purple-500",
     items: [
       "System prompts",
       "Task templates",
       "Few-shot examples",
-      "Persona definitions",
-    ],
-  },
+      "Persona definitions"
+    ]
+  }
 ]
 
 const footerLinks = {
   platform: [
     { label: "Explore", href: "/" },
     { label: "Trending", href: "/" },
-    { label: "Categories", href: "/" },
+    { label: "Categories", href: "/" }
   ],
   community: [
     { label: "Contributors", href: "/" },
     { label: "Discord", href: "/" },
-    { label: "GitHub", href: "/" },
+    { label: "GitHub", href: "/" }
   ],
   resources: [
     { label: "Getting Started", href: "/" },
     { label: "How to Contribute", href: "/" },
-    { label: "Best Practices", href: "/" },
-  ],
+    { label: "Best Practices", href: "/" }
+  ]
 }
 
 // =============================================================================
@@ -264,12 +251,11 @@ function HeroSection() {
         </Badge>
         <h1 className="text-4xl md:text-6xl font-bold mb-6 text-balance">
           Share and discover
-          <span className="text-primary"> developer .md files</span>
+          <span className="text-primary">developer .md files</span>
         </h1>
         <p className="text-xl text-muted-foreground mb-8 text-pretty max-w-3xl mx-auto">
-          The community hub where developers share skills, architectures, and prompts
-          for building better AI agents. Contribute your discoveries, follow inspiring
-          creators, and accelerate your development.
+          The community hub where developers share skills, architectures, and prompts for building better AI agents.
+          Contribute your discoveries, follow inspiring creators, and accelerate your development.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button size="lg" asChild>
@@ -407,7 +393,7 @@ function ContributionCard({ contribution }: { contribution: Contribution }) {
   const typeConfig = {
     skill: { icon: Bot, label: "Skill", variant: "default" as const },
     architecture: { icon: Layers, label: "Architecture", variant: "secondary" as const },
-    prompt: { icon: Code, label: "Prompt", variant: "outline" as const },
+    prompt: { icon: Code, label: "Prompt", variant: "outline" as const }
   }
   const config = typeConfig[contribution.type]
 
@@ -500,8 +486,8 @@ function CTASection() {
               Ready to join the community?
             </CardTitle>
             <CardDescription className="text-lg">
-              Share your skills, discover amazing contributions, and connect with
-              developers building the future of AI agents.
+              Share your skills, discover amazing contributions, and connect with developers building the future of AI
+              agents.
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col sm:flex-row gap-4 justify-center pb-8">

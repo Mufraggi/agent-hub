@@ -1,4 +1,5 @@
-import { sql } from "drizzle-orm"
+// src/db/schema/skills.ts
+import { relations, sql } from "drizzle-orm"
 import {
   boolean,
   check,
@@ -11,7 +12,6 @@ import {
   uuid,
   varchar
 } from "drizzle-orm/pg-core"
-import { agents } from "./agents"
 import { user } from "./auth"
 
 export const skills = pgTable(
@@ -20,8 +20,9 @@ export const skills = pgTable(
     id: uuid("id").primaryKey().defaultRandom(),
     name: varchar("name", { length: 100 }).notNull(),
     slug: varchar("slug", { length: 100 }).notNull().unique(),
-    category: varchar("category", { length: 50 }).notNull(),
     description: text("description"),
+
+    // Le contenu du SKILL.md
     content: text("content").notNull(),
 
     // Metadata
@@ -39,21 +40,23 @@ export const skills = pgTable(
     updatedAt: timestamp("updated_at").defaultNow().notNull()
   },
   (table) => ({
-    downloadsCheck: check(
-      "skills_downloads_check",
-      sql`${table.downloadsCount} >= 0`
-    ),
-    starsCheck: check(
-      "skills_stars_check",
-      sql`${table.starsCount} >= 0`
-    ),
+    downloadsCheck: check("skills_downloads_check", sql`${table.downloadsCount} >= 0`),
+    starsCheck: check("skills_stars_check", sql`${table.starsCount} >= 0`),
     createdByIdx: index("idx_skills_created_by").on(table.createdBy),
-    isPublicIdx: index("idx_skills_is_public").on(table.isPublic),
-    categoryIdx: index("idx_skills_category").on(table.category)
+    isPublicIdx: index("idx_skills_is_public").on(table.isPublic)
   })
 )
 
-// Skill Dependencies (self-referencing)
+export const skillsRelations = relations(skills, ({ one, many }) => ({
+  creator: one(user, {
+    fields: [skills.createdBy],
+    references: [user.id]
+  }),
+  dependencies: many(skillDependencies, { relationName: "skill" }),
+  dependents: many(skillDependencies, { relationName: "dependency" })
+}))
+
+// Skill Dependencies (un skill peut dépendre d'autres skills)
 export const skillDependencies = pgTable(
   "skill_dependencies",
   {
@@ -77,34 +80,15 @@ export const skillDependencies = pgTable(
   })
 )
 
-// Agent-Skills many-to-many
-export const agentSkills = pgTable(
-  "agent_skills",
-  {
-    agentId: uuid("agent_id")
-      .references(() => agents.id, { onDelete: "cascade" })
-      .notNull(),
-    skillId: uuid("skill_id")
-      .references(() => skills.id, { onDelete: "cascade" })
-      .notNull(),
-    loadOrder: integer("load_order").notNull(),
-    isRequired: boolean("is_required").default(true).notNull(),
-    createdAt: timestamp("created_at").defaultNow().notNull()
-  },
-  (table) => ({
-    pk: primaryKey({ columns: [table.agentId, table.skillId] }),
-    loadOrderCheck: check(
-      "load_order_check",
-      sql`${table.loadOrder} > 0`
-    ),
-    agentIdx: index("idx_agent_skills_agent").on(table.agentId),
-    skillIdx: index("idx_agent_skills_skill").on(table.skillId)
+export const skillDependenciesRelations = relations(skillDependencies, ({ one }) => ({
+  skill: one(skills, {
+    fields: [skillDependencies.skillId],
+    references: [skills.id],
+    relationName: "skill"
+  }),
+  dependency: one(skills, {
+    fields: [skillDependencies.dependsOnSkillId],
+    references: [skills.id],
+    relationName: "dependency"
   })
-)
-
-export type Skill = typeof skills.$inferSelect
-export type NewSkill = typeof skills.$inferInsert
-export type SkillDependency = typeof skillDependencies.$inferSelect
-export type NewSkillDependency = typeof skillDependencies.$inferInsert
-export type AgentSkill = typeof agentSkills.$inferSelect
-export type NewAgentSkill = typeof agentSkills.$inferInsert
+}))
