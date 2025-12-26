@@ -66,9 +66,9 @@ export default function() {
             />
           </div>
           <Button asChild className="shrink-0">
-            <Link to="/">
+            <Link to="/create">
               <Plus className="h-4 w-4 mr-2" />
-              <span className="hidden sm:inline">Partager</span>
+              <span className="hidden sm:inline">Créer</span>
             </Link>
           </Button>
         </div>
