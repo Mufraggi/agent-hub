@@ -1,20 +1,20 @@
-import { Link, useNavigate } from "@tanstack/react-router";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { authClient } from "@/lib/auth/auth-client";
-import { Search, Plus, User } from "lucide-react";
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { authClient } from "@/lib/auth/auth-client"
+import { Link, useNavigate } from "@tanstack/react-router"
+import { Plus, Search, User } from "lucide-react"
 
-export default function () {
-  const { data: session } = authClient.useSession();
-  const navigate = useNavigate();
+export default function() {
+  const { data: session } = authClient.useSession()
+  const navigate = useNavigate()
 
   const logout = async () => {
     await authClient.signOut({
       fetchOptions: {
-        onSuccess: () => navigate({ to: "/login" }),
-      },
-    });
-  };
+        onSuccess: () => navigate({ to: "/login" })
+      }
+    })
+  }
 
   if (!session) {
     return (
@@ -37,7 +37,7 @@ export default function () {
           </div>
         </div>
       </header>
-    );
+    )
   }
 
   return (
@@ -88,5 +88,5 @@ export default function () {
         </div>
       </div>
     </header>
-  );
+  )
 }
