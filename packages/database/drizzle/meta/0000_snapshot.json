@@ -1,5 +1,5 @@
 {
-  "id": "c6e8a22a-7030-4f83-bb9e-ee1e66d08621",
+  "id": "ee8ceb73-1e48-4a62-989b-1520659cb038",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -44,27 +44,6 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
-        },
-        "model_preference": {
-          "name": "model_preference",
-          "type": "varchar(50)",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'claude-sonnet-4'"
-        },
-        "temperature": {
-          "name": "temperature",
-          "type": "numeric(3, 2)",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'0.70'"
-        },
-        "max_tokens": {
-          "name": "max_tokens",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 4096
         },
         "created_by": {
           "name": "created_by",
@@ -199,14 +178,6 @@
         "agent_type_check": {
           "name": "agent_type_check",
           "value": "\"agents\".\"type\" IN ('orchestrator', 'worker', 'specialist')"
-        },
-        "temperature_check": {
-          "name": "temperature_check",
-          "value": "\"agents\".\"temperature\" >= 0 AND \"agents\".\"temperature\" <= 2"
-        },
-        "max_tokens_check": {
-          "name": "max_tokens_check",
-          "value": "\"agents\".\"max_tokens\" > 0"
         },
         "downloads_check": {
           "name": "downloads_check",

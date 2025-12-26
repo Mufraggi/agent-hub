@@ -5,9 +5,6 @@ CREATE TABLE "agents" (
 	"type" varchar(20) NOT NULL,
 	"description" text,
 	"system_prompt" text NOT NULL,
-	"model_preference" varchar(50) DEFAULT 'claude-sonnet-4' NOT NULL,
-	"temperature" numeric(3, 2) DEFAULT '0.70' NOT NULL,
-	"max_tokens" integer DEFAULT 4096 NOT NULL,
 	"created_by" text NOT NULL,
 	"is_public" boolean DEFAULT false NOT NULL,
 	"version" varchar(20) DEFAULT '1.0.0' NOT NULL,
@@ -18,8 +15,6 @@ CREATE TABLE "agents" (
 	"updated_at" timestamp DEFAULT now() NOT NULL,
 	CONSTRAINT "agents_slug_unique" UNIQUE("slug"),
 	CONSTRAINT "agent_type_check" CHECK ("agents"."type" IN ('orchestrator', 'worker', 'specialist')),
-	CONSTRAINT "temperature_check" CHECK ("agents"."temperature" >= 0 AND "agents"."temperature" <= 2),
-	CONSTRAINT "max_tokens_check" CHECK ("agents"."max_tokens" > 0),
 	CONSTRAINT "downloads_check" CHECK ("agents"."downloads_count" >= 0),
 	CONSTRAINT "forks_check" CHECK ("agents"."forks_count" >= 0),
 	CONSTRAINT "stars_check" CHECK ("agents"."stars_count" >= 0)
